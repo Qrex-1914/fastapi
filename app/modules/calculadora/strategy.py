@@ -2,23 +2,23 @@ from abc import ABC, abstractmethod
 
 class Strategy(ABC):
     @abstractmethod
-    def execute(self, num1, num2):
+    def execute(self, num1:int, num2:int)-> float:
         pass
 
 class Suma(Strategy):
-    def execute(self, num1, num2):
+    def execute(self, num1:int, num2:int)-> float:
         return num1 + num2
 
 class Resta(Strategy):
-    def execute(self, num1, num2):
+    def execute(self, num1:int, num2:int)-> float:
         return num1 - num2
 
 class Multiplicacion(Strategy):
-    def execute(self, num1, num2):
+    def execute(self, num1:int, num2:int)-> float:
         return num1 * num2
 
 class Division(Strategy):
-    def execute(self, num1, num2):
+    def execute(self, num1:int, num2:int)-> float:
         if num2 == 0:
             return 0
         else :
@@ -26,14 +26,14 @@ class Division(Strategy):
 
 
 #la estrategia
-class Contexto:
-    def __init__(self, estrategia):
-        self.estrategia = estrategia
+#class Contexto:
+#    def __init__(self, estrategia):
+#        self.estrategia = estrategia
 
-    def ejecutar_operacion(self, num1, num2):
-        return self.estrategia.execute(num1, num2)
+#    def ejecutar_operacion(self, num1, num2):
+#        return self.estrategia.execute(num1, num2)
 
-# Ejemplo de uso
+## Ejemplo de uso
 if __name__ == "__main__":
     contexto = Contexto(Suma())
     resultado = contexto.ejecutar_operacion(10, 5)

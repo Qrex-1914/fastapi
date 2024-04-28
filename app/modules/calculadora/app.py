@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
-from .strategy import Strategy,Suma,Resta,Multiplicacion,Division,Contexto
+from .strategy import Strategy,Suma,Resta,Multiplicacion,Division
 from enum import Enum
 
 class Operacion(Enum):
-    SUMA = "Suma"
-    RESTA = "Resta"
-    MULTIPLICACION = "Multiplicacion"
-    DIVISION = "Division"
+    SUMA = "suma"
+    RESTA = "resta"
+    MULTIPLICACION = "multiplicacion"
+    DIVISION = "division"
 
 def get_strategy(Operacion: Operacion) -> Strategy:
     if Operacion == Operacion.SUMA:
@@ -23,12 +23,6 @@ def get_strategy(Operacion: Operacion) -> Strategy:
 
 router = APIRouter()
 
-@router.get("/suma")
-def suma(num1: int, num2: int, Contexto: Strategy = Depends(get_strategy)) -> dict:
-    return Contexto.ejecutar_operacion(num1=num1, num2=num2)
-
-@router.get("/resta")
-
-@router.get("/multiplicacion")
-
-@router.get("/division")
+@router.get("/operacion")
+def operacion(num1: int, num2: int, operation: Strategy = Depends(get_strategy)) -> float:
+    return operation.execute(num1=num1, num2=num2)
